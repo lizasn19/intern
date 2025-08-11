@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXYARY</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo.png">
+    <meta name="theme-color" content="#25D366">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background-color: #000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+            /* Responsive Typography */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2.5rem !important;
+        }
+        h2 {
+            font-size: 2rem !important;
+        }
+        h3 {
+            font-size: 1.75rem !important;
+        }
+        .text-xl {
+            font-size: 1.125rem !important;
+        }
+        .hero-section p {
+            font-size: 1rem !important;
+        }
+    }
+
+    /* Responsive Spacing */
+    @media (max-width: 768px) {
+        .py-24 {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
+        }
+        .px-8 {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        .gap-16 {
+            gap: 2rem !important;
+        }
+        .mb-16 {
+            margin-bottom: 2rem !important;
+        }
+    }
+
+    /* Responsive Images */
+    @media (max-width: 768px) {
+        .object-cover {
+            height: 250px !important;
+        }
+    }
+
+    /* Mobile Menu Animation */
+    #mobileMenu {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #mobileMenu.hidden {
+        display: none;
+    }
+
+    /* Responsive Cards */
+    @media (max-width: 768px) {
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+        
+        .grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    /* Fix for WhatsApp button on mobile */
+    @media (max-width: 768px) {
+        .whatsapp-float {
+            bottom: 16px;
+            right: 16px;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .whatsapp-float img {
+            width: 28px;
+            height: 28px;
+        }
+    }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-30 bg-white/90 backdrop-blur-md shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="DXYARY Logo" class="h-16 w-auto">
+                    </a>
+                </div>
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">Home</a>
+                    <a href="aromansa.html" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">Aromansa</a>
+                    <a href="potraits.html" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">Potraits</a>
+                    <a href="about.html" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">About</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden flex items-center" id="mobileMenuButton">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    
+        <!-- Mobile Menu -->
+        <div class="md:hidden">
+            <div id="mobileMenu" class="hidden bg-white fixed inset-0 z-40 transition-transform duration-300 ease-in-out transform translate-x-full">
+                <div class="flex justify-between items-center p-4 border-b">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="DXYARY Logo" class="h-12 w-auto">
+                    </a>
+                    <button id="closeMobileMenu" class="p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <a href="index.html" class="block py-4 text-lg font-medium border-b border-gray-200">Home</a>
+                    <a href="aromansa.html" class="block py-4 text-lg font-medium border-b border-gray-200">Aromansa</a>
+                    <a href="potraits.html" class="block py-4 text-lg font-medium border-b border-gray-200">Potraits</a>
+                    <a href="about.html" class="block py-4 text-lg font-medium">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobileMenuOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-30"></div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen">
+        <div class="carousel-container relative h-full">
+            <div class="absolute inset-0">
+                <img src="images/baner.png" alt="DXYARY" class="w-full h-full object-cover">
+                <div class="absolute inset-0 hero-gradient"></div>
+                <div class="absolute inset-0 flex items-center justify-center text-white text-center">
+                    <div class="max-w-4xl px-4">
+                        <h1 class="text-7xl font-bold mb-6 leading-tight animate-fade-in">DXYARY</h1>
+                        <p class="text-2xl font-light mb-12 animate-fade-in-delayed">Memadukan Seni Kopi dan Fotografi dalam Setiap Momen</p>
+                        <div class="flex justify-center gap-6">
+                            <a href="aromansa.html" class="bg-white text-black px-8 py-4 rounded-full font-medium hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105">
+                                Jelajahi Aromansa
+                            </a>
+                            <a href="potraits.html" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-medium hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105">
+                                Lihat Potraits
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Preview -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-6">Program Kami</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Temukan pengalaman unik dalam paduan seni kopi dan fotografi</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <a href="aromansa.html" class="group">
+                    <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-xl">
+                        <div class="relative">
+                            <img src="images/potraits.jpg" alt="Aromansa" class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-30 transition-all duration-300"></div>
+                            <h3 class="absolute bottom-6 left-8 text-3xl font-bold text-white">Aromansa</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="potraits.html" class="group">
+                    <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-xl">
+                        <div class="relative">
+                            <img src="images/potraits.jpg" alt="Potraits" class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-30 transition-all duration-300"></div>
+                            <h3 class="absolute bottom-6 left-8 text-3xl font-bold text-white">Potraits</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <img src="images/logo.png" alt="DXYARY Logo" class="h-20 mb-6">
+                    <p class="text-gray-400">PT Hanjaya Dayari Raya</p>
+                    <p class="text-gray-400 mt-2">Taman Melati Yogyakarta Com 11, DI Yogyakarta 55284</p>
+                    <p class="text-gray-400 mt-2">+(62) 811 2635 197</p>
+                    <p class="text-gray-400 mt-2">mail@dxyary.com</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="index.html" class="block text-gray-400 hover:text-white">Home</a>
+                        <a href="aromansa.html" class="block text-gray-400 hover:text-white">Aromansa</a>
+                        <a href="potraits.html" class="block text-gray-400 hover:text-white">Potraits</a>
+                        <a href="about.html" class="block text-gray-400 hover:text-white">About</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:-translate-y-1 transition-transform">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:-translate-y-1 transition-transform">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:-translate-y-1 transition-transform">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:-translate-y-1 transition-transform">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 DXYARY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/628112635197" target="_blank" class="whatsapp-float">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-8 h-8">
+    </a>
+
+    <script>
+        // Mobile Menu Functionality
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+    
+        function openMobileMenu() {
+            document.body.style.overflow = 'hidden';
+            mobileMenu.classList.remove('hidden', 'translate-x-full');
+            mobileMenuOverlay.classList.remove('hidden');
+        }
+    
+        function closeMobileMenu() {
+            document.body.style.overflow = '';
+            mobileMenu.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuOverlay.classList.add('hidden');
+            }, 300);
+        }
+    
+        mobileMenuButton.addEventListener('click', openMobileMenu);
+        closeMobileMenu.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    
+        // Close mobile menu when clicking links
+        Array.from(mobileMenuLinks).forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+    
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) { // md breakpoint
+                closeMobileMenu();
+            }
+        });
+    
+        // Responsive Images and Cards
+        function handleResponsiveElements() {
+            const isMobile = window.innerWidth < 768;
+            
+            // Adjust hero image height
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.style.height = isMobile ? '70vh' : '100vh';
+            }
+    
+            // Adjust card layouts
+            const cardGrids = document.querySelectorAll('.grid');
+            cardGrids.forEach(grid => {
+                if (isMobile) {
+                    grid.classList.remove('md:grid-cols-3', 'md:grid-cols-2');
+                    grid.classList.add('grid-cols-1');
+                }
+            });
+        }
+    
+        // Initial call and resize listener
+        handleResponsiveElements();
+        window.addEventListener('resize', handleResponsiveElements);
+    </script>
+    
+</body>
+</html>

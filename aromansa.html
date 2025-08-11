@@ -1,0 +1,162 @@
+<!-- aromansa.html -->
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DXYARY</title>
+        <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/logo.png">
+        <meta name="theme-color" content="#25D366">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            * {
+                font-family: 'Poppins', sans-serif;
+                scroll-behavior: smooth;
+            }
+            
+            .hero-gradient {
+                background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+            }
+    
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+    
+            .card-hover:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+    
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -4px;
+                left: 50%;
+                background-color: #000;
+                transition: all 0.3s ease;
+            }
+    
+            .nav-link:hover::after {
+                width: 100%;
+                left: 0;
+            }
+    
+            .whatsapp-float {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background-color: #25D366;
+                color: white;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+                z-index: 1000;
+                transition: transform 0.3s ease;
+            }
+    
+            .whatsapp-float:hover {
+                transform: scale(1.1);
+            }
+        </style>
+    </head>
+<body class="bg-white">
+    <nav class="fixed w-full z-30 bg-white/90 backdrop-blur-md shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="DXYARY Logo" class="h-16 w-auto">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">Home</a>
+                    <a href="aromansa.html" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">Aromansa</a>
+                    <a href="potraits.html" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">Potraits</a>
+                    <a href="about.html" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Aromansa Hero -->
+    <section class="relative pt-20">
+        <div class="h-[60vh] relative">
+            <img src="images/potraits.jpg" alt="Aromansa" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div class="text-center text-white">
+                    <h1 class="text-6xl font-bold mb-6">Aromansa</h1>
+                    <p class="text-xl max-w-2xl mx-auto">Jelajahi cita rasa kopi terbaik dari kedai-kedai pilihan kami</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coffee Shop Grid -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Coffee Shop Cards [Similar to original but with enhanced styling] -->
+                <!-- [Add the 6 coffee shop cards with enhanced hover effects and animations] -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <img src="images/logo.png" alt="DXYARY Logo" class="h-20 mb-6">
+                    <p class="text-gray-400">PT Hanjaya Dayari Raya</p>
+                    <p class="text-gray-400 mt-2">Taman Melati Yogyakarta Com 11, DI Yogyakarta 55284</p>
+                    <p class="text-gray-400 mt-2">+(62) 811 2635 197</p>
+                    <p class="text-gray-400 mt-2">mail@dxyary.com</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="index.html" class="block text-gray-400 hover:text-white">Home</a>
+                        <a href="aromansa.html" class="block text-gray-400 hover:text-white">Aromansa</a>
+                        <a href="potraits.html" class="block text-gray-400 hover:text-white">Potraits</a>
+                        <a href="about.html" class="block text-gray-400 hover:text-white">About</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:-translate-y-1 transition-transform">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:-translate-y-1 transition-transform">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:-translate-y-1 transition-transform">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:-translate-y-1 transition-transform">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 DXYARY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/628112635197" target="_blank" class="whatsapp-float">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-8 h-8">
+    </a>
+</body>
+</html>

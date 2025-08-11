@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXYARY</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo.png">
+    <meta name="theme-color" content="#25D366">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        /* Existing styles */
+        .hero-gradient {
+            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: white;
+            transition: 0.3s ease-in-out;
+            z-index: 50;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease-in-out;
+            z-index: 40;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Other existing styles */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background-color: #000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .blog-card {
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: scale(1.02);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+
+        .carousel-fade {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-fade.active {
+            opacity: 1;
+        }
+
+                /* Gaya untuk tombol WhatsApp */
+                .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Efek animasi hover */
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #1ebe57;
+        }
+
+        .whatsapp-float img {
+            width: 35px;
+            height: 35px;
+        }
+
+        /* Tombol close */
+        .close-btn {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+        }
+        
+    </style>
+</head>
+<body class="bg-white">
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <img src="images/logo.png" alt="DXYARY Logo" class="h-8">
+                <button id="closeMenu" class="text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6">
+                <a href="#home" class="text-xl font-medium">Home</a>
+                <a href="#aromansa" class="text-xl font-medium">Aromansa</a>
+                <a href="#potraits" class="text-xl font-medium">Potraits</a>
+                <a href="#about" class="text-xl font-medium">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-30 bg-white shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <img src="images/logo.png" alt="DXYARY Logo" class="h-20 w-auto">
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">Home</a>
+                    <a href="#aromansa" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">Aromansa</a>
+                    <a href="#potraits" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">Potraits</a>
+                    <a href="#about" class="nav-link text-gray-800 font-medium hover:text-black transition-all duration-300">About</a>
+                </div>
+                <button class="md:hidden text-2xl" id="openMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen">
+        <div class="carousel-container relative h-full">
+            <div class="carousel-fade active absolute inset-0">
+                <img src="images/baner.png" alt="DXYARY" class="w-full h-full object-cover">
+                <div class="absolute inset-0 hero-gradient"></div>
+                <div class="absolute inset-0 flex items-center justify-center text-white text-center">
+                    <div class="max-w-3xl px-4">
+                        <h1 class="text-6xl font-bold mb-6 leading-tight">DXYARY</h1>
+                        <p class="text-xl font-light mb-8">Memadukan Seni Kopi dan Fotografi dalam Setiap Momen</p>
+                        <a href="#about">
+                            <button class="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-all duration-300">
+                                Jelajahi Kisah Kami
+                            </button>
+                        </a>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Program Kami</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Temukan pengalaman unik dalam paduan seni kopi dan fotografi</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Aromansa Card -->
+                <div class="card-hover bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/aromansa.jpg" alt="Aromansa" class="w-full h-72 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">Aromansa</h3>
+                        <p class="text-gray-600 mb-6" style="text-align: justify;">
+                            Jelajahi cita rasa kopi terbaik yang menghadirkan pengalaman tak terlupakan di kedai-kedai pilihan kami. Setiap tegukan menghadirkan harmoni rasa dari biji kopi berkualitas yang dipilih dengan cermat dan diseduh oleh barista profesional. Nikmati suasana kedai yang nyaman, ideal untuk bersantai, bekerja, atau berkumpul bersama. Dari espresso yang kaya hingga manual brew yang lembut, setiap racikan disajikan dengan standar terbaik untuk memanjakan lidah dan membangkitkan semangat Anda.
+                        </p>
+                        <a href="#aromansa" class="inline-flex items-center text-black font-medium hover:opacity-75 transition-opacity">
+                            Pelajari Lebih Lanjut
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Potraits Card -->
+                <div class="card-hover bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/potraits.jpg" alt="Potraits" class="w-full h-72 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">Potraits</h3>
+                        <p class="text-gray-600 mb-6" style="text-align: justify;">
+                            Abadikan setiap momen berharga Anda dengan sentuhan artistik yang menghadirkan keindahan dalam setiap detail. Fotografer profesional kami siap mengabadikan kenangan spesial dengan teknik fotografi terbaik, pencahayaan sempurna, dan komposisi yang estetis. Baik untuk prewedding, acara keluarga, perayaan, atau sesi foto personal, kami memastikan setiap gambar menceritakan kisah yang tak terlupakan. Percayakan momen istimewa Anda kepada kami dan nikmati hasil foto berkualitas tinggi yang penuh emosi dan kehangatan.
+                        </p>
+                        <a href="#potraits" class="inline-flex items-center text-black font-medium hover:opacity-75 transition-opacity">
+                            Pelajari Lebih Lanjut
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aromansa Section -->
+    <section id="aromansa" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Aromansa</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Jelajahi koleksi coffee shop terbaik kami</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Coffee Shop Cards -->
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/agoge.JPG" alt="Agoge Cafe" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Agoge Cafe</h3>
+                        <p class="text-gray-600" style="text-align: justify;">
+                            Agoge Cafe dibuka pada tahun 2021 sebagai sebuah cafe kecil. Uniknya, nama “Agoge” diambil dari istilah bangsa Yunani Kuno untuk menyebut sistem pendidikan dan pelatihan militer. Pelatihan ini menghasilkan kelompok “Sparta” yang terkenal sebagai pasukan militer terbaik di era Yunani Kuno. Agoge Cafe yang menjadi tempat berkumpulnya berbagai komunitas menyediakan fasilitas yang memadai, seperti tempat parkir sepeda, smoking area, wifi, dan ruangan ber-AC. Pada tahun 2023, Agoge Cafe melakukan ekspansi sehingga kini menjadi cafe dengan space yang lebih luas.
+                          </p>
+                          
+                    </div>
+                </div>
+
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/ethikopia.jpg" alt="Ethikopia CoffeeBay" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Ethikopia CoffeeBay</h3>
+                        <p class="text-gray-600" style="text-align: justify;">
+                            Ethikopia CoffeeBay merupakan sebuah coffee shop yang terletak di Karang Geneng, Sendangadi, Mlati, Sleman, Yogyakarta. Meskipun lokasinya terletak cukup tersembunyi dari tengah perkotaan, tetapi Ethikopia tetap menjadi salah satu coffee shop yang populer, terutama bagi para mahasiswa dan freelancer. Ethikopia bahkan dijuluki sebagai “House of Ambis”, karena layout ruangan yang sangat nyaman untuk dijadikan tempat ber-produktivitas. Ethikopia CoffeeBay menjadi tempat yang cocok bagi mahasiswa, freelancer, generasi boomer, bahkan anak-anak untuk melakukan kegiatan produktifnya. 
+                          </p>
+                    </div>
+                </div>
+
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/homeground.jpg" alt="Homeground By CRSL" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Homeground By CRSL</h3>
+                        <p class="text-gray-600" style="text-align: justify;">
+                            CRSL dikenal sebagai brand lokal Yogyakarta yang memiliki karakter-karakter hewan unik. Mulai dari dinosaurus, beruang, kucing, babi, dan panda, setiap karakternya memiliki persona masing-masing. Kini, kelima karakter lucu CRSL memiliki rumah, yaitu di Cafe Homeground by CRSL. Melalui Homeground by CRSL, customer dapat mengenal kelima karakter CRSL lebih dalam lagi. Mulai dari design interior, menu, hingga alat makan yang digunakan, identik dengan kelima karakter hewan yang disebut “CRSL Gengs” ini. 
+                          </p>
+                    </div>
+                </div>
+
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/nak lanang.jpg" alt="Nak Lanang" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Nak Lanang</h3>
+                        <p class="text-gray-600" style="text-align: justify;">
+                            Nak Lanang, dalam Bahasa Jawa berarti “anak laki-laki”. Nak Lanang merupakan sebuah coffee shop, atau sang owner suka menyebutnya sebagai warung kopi, yang terletak di dekat stasiun lama Maguwoharjo, Yogyakarta. Warung kopi ini dibangun oleh dua orang laki-laki yang merupakan kakak-beradik, sehingga tempat ini dinamai Nak Lanang. Salah satu menu signature-nya, yaitu Ragil, sangat cocok dinikmati di cafe ini. Ditambah lagi, customer bisa merasakan pengalaman unik ngopi di Spot Kopi Sore Nak Lanang. Di spot ini, customer bisa menikmati kopi tepat di pinggir rel kereta api, sambil melihat kereta api yang lewat.
+                          </p>
+                    </div>
+                </div>
+
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/santai clubhouse.jpg" alt="Santai Clubhouse" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Santai Clubhouse</h3>
+                        <p class="text-gray-600" style="text-align: justify;">
+                            Jogja adalah kota istimewa. Kota ini memang pantas diberi julukan tersebut, karena pemandangannya, warganya, dan juga kulturnya. Santai Clubhouse, sebuah cafe di kota ini juga bergerak di dalam sebuah bangunan yang istimewa. Bangunan ini merupakan sebuah rumah yang sudah berdiri sejak tahun 1922. Bangunan dengan sejarah panjang ini pun berhasil dihidupkan kembali menjadi Santai Clubhouse yang bukan sekedar cafe biasa, tetapi juga menjadi wadah komunitas dan wadah kolaborasi. Memiliki ruangan semi outdoor, garden area, serta listening room, tempat ini tepat untuk berinteraksi dengan santai.
+                          </p>
+                    </div>
+                </div>
+
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/suara dewandaru.jpg" alt="Suara Dewandaru" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Suara Dewandaru</h3>
+                        <p class="text-gray-600" style="text-align: justify;">
+                            Minuman Dewandaru adalah menu yang hanya bisa ditemukan di Suara Dewandaru sebulan sekali. Menu ini hanya disajikan ketika pohon dewandaru sedang berbuah. Suara Dewandaru juga mengutamakan pemberdayaan lokal. Menu minuman milk based menggunakan susu segar yang diproduksi langsung di peternakan setempat. Menu Nasi Ayam Kecombrang juga patut untuk dicoba, yang kecombrangnya bersumber dari hasil tanaman sendiri. Uniknya lagi, nama-nama menu di cafe ini terinspirasi dari judul lagu ataupun nama para musisi.
+                          </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Potraits Section -->
+    <section id="potraits" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Potraits</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Koleksi momen berharga dalam bingkai fotografi</p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/potraits.jpg" alt="Portrait 1" class="w-full h-48 object-cover">
+                </div>
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/potraits.jpg" alt="Portrait 2" class="w-full h-48 object-cover">
+                </div>
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="images/potraits.jpg" alt="Portrait 3" class="w-full h-48 object-cover">
+                </div>
+            </div>
+
+            <!-- Suggestion Form -->
+            <!-- <div class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6">Bagikan Ide Anda</h3>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
+                            <input type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-black focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-black focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Saran Konten</label>
+                            <textarea class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-black focus:outline-none h-32"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors">
+                            Kirim Saran
+                        </button>
+                    </form>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Tentang DXYARY</h2>
+                    <!-- About Section (continued) -->
+                    <p class="text-gray-600 mb-8" style="text-align: justify;">DXYARY adalah ruang kreatif yang menggabungkan dua passion utama kami: kopi dan fotografi. Didirikan pada tahun 2020, kami berkomitmen untuk menghadirkan pengalaman unik dalam menikmati kopi sambil mengabadikan momen-momen berharga.</p>
+                    
+                    <h3 class="text-2xl font-bold mb-4 ">Perjalanan Kami</h3>
+                    <p class="text-gray-600 mb-8" style="text-align: justify;">Berawal dari komunitas pecinta kopi dan fotografi, DXYARY terus berkembang menjadi wadah bagi para penikmat kopi dan pencinta seni fotografi untuk berbagi pengalaman dan inspirasi. Kami telah berkolaborasi dengan berbagai coffee shop terbaik di Yogyakarta dan mengabadikan ribuan momen berharga bagi klien kami.</p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>6+ Tahun Pengalaman</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>50+ Coffee Shop Partner</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>1000+ Client Satisfied</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6">Hubungi Kami</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-map-marker-alt text-xl text-gray-600 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Alamat</h4>
+                                <p class="text-gray-600">Taman Melati Yogyakarta Com 11, DI Yogyakarta 55284</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-phone text-xl text-gray-600 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">WhatsApp</h4>
+                                <a href="tel:+6281126351197" class="text-gray-600 hover:text-black">+(62) 811 2635 197</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-envelope text-xl text-gray-600 mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Email</h4>
+                                <a href="mailto:mail@dxyary.com" class="text-gray-600 hover:text-black">mail@dxyary.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Maps -->
+                    <div class="mt-8 rounded-xl overflow-hidden">
+                        <iframe
+                           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.636500564053!2d110.36392377457184!3d-7.749446992269398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a592e3ab4bbf9%3A0x41bba62baf528d1f!2sLembvr%20Creative%20Media!5e1!3m2!1sid!2sid!4v1738273598342!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                           <st>.gmap_canvas {overflow:hidden;background:none!important;height:450px;width:600px;}</style>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <img src="images/logo.png" alt="DXYARY Logo" class="h-20 mb-6">
+                    <p class="text-gray-400">PT Hanjaya Dayari Raya</p>
+                    <p class="text-gray-400 mt-2">Taman Melati Yogyakarta Com 11, DI Yogyakarta 55284</p>
+                    <p class="text-gray-400 mt-2">+(62) 811 2635 197</p>
+                    <p class="text-gray-400 mt-2">mail@dxyary.com</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#home" class="block text-gray-400 hover:text-white">Home</a>
+                        <a href="#aromansa" class="block text-gray-400 hover:text-white">Aromansa</a>
+                        <a href="#potraits" class="block text-gray-400 hover:text-white">Potraits</a>
+                        <a href="#about" class="block text-gray-400 hover:text-white">About</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 DXYARY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Tombol WhatsApp -->
+    <a id="whatsappButton" href="https://wa.me/628112635197" target="_blank" class="whatsapp-float">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <!-- Tombol Close -->
+    <button id="closeButton" class="close-btn">×</button>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const openMenuBtn = document.getElementById('openMenu');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        openMenuBtn.addEventListener('click', openMobileMenu);
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when clicking on links
+        Array.from(mobileMenuLinks).forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+                
+                // Smooth scroll to section
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+        // Your existing carousel code
+        const carouselImages = [
+            "images/baner_1.jpg",
+            "images/baner_2.jpg",
+            "images/baner_3.jpg",
+        ];
+
+        let currentSlide = 0;
+        const carousel = document.querySelector('.carousel-fade');
+
+        function updateCarousel() {
+            carousel.classList.remove('active');
+            setTimeout(() => {
+                const img = carousel.querySelector('img');
+                img.src = carouselImages[currentSlide];
+                carousel.classList.add('active');
+                currentSlide = (currentSlide + 1) % carouselImages.length;
+            }, 500);
+        }
+
+        setInterval(updateCarousel, 5000);
+
+        // Smooth scroll functionality
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        
+    </script>
+</body>
+</html>

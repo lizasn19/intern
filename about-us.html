@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXYARY</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/logo.png">
+    <meta name="theme-color" content="#25D366">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(
+                to right,
+                rgba(0,0,0,0.7),
+                rgba(0,0,0,0.7)
+            );
+        }
+
+        .card-hover {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.98);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 50;
+            backdrop-filter: blur(10px);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .nav-link {
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            /* background-color: #000; */
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .social-icon {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-4px);
+            color: #ffffff !important;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Animated background for hero section */
+        .hero-bg-animate {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Smooth transition for images */
+        .img-transition {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .img-transition:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-30 bg-white/95 backdrop-blur-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <img src="images/logo.png" alt="DXYARY Logo" class="h-16 w-auto rounded-full">
+
+                </div>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#home" class="nav-link text-white font-medium hover:text-gray-300 transition-all duration-300">Home</a>
+                    <a href="#aromansa" class="nav-link text-white font-medium hover:text-gray-300 transition-all duration-300">Aromansa</a>
+                    <a href="#potraits" class="nav-link text-white font-medium hover:text-gray-300 transition-all duration-300">Potraits</a>
+                    <a href="#about" class="nav-link text-white font-medium hover:text-gray-300 transition-all duration-300">About</a>                    
+                </div>
+                <button class="md:hidden text-2xl text-white hover:text-gray-300 transition-colors focus:outline-none" id="openMenu">
+                    <i class="fas fa-bars"></i>
+                </button>                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="p-8">
+            <div class="flex justify-between items-center mb-12">
+                <img src="images/logo.png" alt="DXYARY Logo" class="h-12">
+                <button id="closeMenu" class="text-3xl focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-8">
+                <a href="#home" class="text-2xl font-medium hover:text-gray-600 transition-colors">Home</a>
+                <a href="#aromansa" class="text-2xl font-medium hover:text-gray-600 transition-colors">Aromansa</a>
+                <a href="#potraits" class="text-2xl font-medium hover:text-gray-600 transition-colors">Potraits</a>
+                <a href="#about" class="text-2xl font-medium hover:text-gray-600 transition-colors">About</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Hero -->
+    <section class="relative pt-20">
+        <div class="h-[60vh] relative">
+            <img src="images/potraits.jpg" alt="About Us" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div class="text-center text-white">
+                    <h1 class="text-6xl font-bold mb-6">About Us</h1>
+                    <p class="text-xl max-w-2xl mx-auto">Mengenal lebih dekat dengan DXYARY</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div class="space-y-6">
+                        <h2 class="text-4xl font-bold">Tentang DXYARY</h2>
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            DXYARY adalah ruang kreatif yang menggabungkan dua passion utama kami: kopi dan fotografi. 
+                            Didirikan pada tahun 2020, kami berkomitmen untuk menghadirkan pengalaman unik dalam 
+                            menikmati kopi sambil mengabadikan momen-momen berharga.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h3 class="text-3xl font-bold">Perjalanan Kami</h3>
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            Berawal dari komunitas pecinta kopi dan fotografi, DXYARY terus berkembang menjadi wadah 
+                            bagi para penikmat kopi dan pencinta seni fotografi untuk berbagi pengalaman dan inspirasi. 
+                            Kami telah berkolaborasi dengan berbagai coffee shop terbaik di Yogyakarta dan mengabadikan 
+                            ribuan momen berharga bagi klien kami.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="text-center p-6 bg-gray-50 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                            <div class="text-3xl font-bold mb-2">6+</div>
+                            <div class="text-gray-600">Tahun Pengalaman</div>
+                        </div>
+                        <div class="text-center p-6 bg-gray-50 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                            <div class="text-3xl font-bold mb-2">50+</div>
+                            <div class="text-gray-600">Coffee Shop Partner</div>
+                        </div>
+                        <div class="text-center p-6 bg-gray-50 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                            <div class="text-3xl font-bold mb-2">1000+</div>
+                            <div class="text-gray-600">Client Satisfied</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-xl">
+                    <h3 class="text-3xl font-bold mb-8">Hubungi Kami</h3>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start space-x-6">
+                            <div class="bg-black p-4 rounded-full text-white">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2">Alamat</h4>
+                                <p class="text-gray-600">Taman Melati Yogyakarta Com 11, DI Yogyakarta 55284</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-6">
+                            <div class="bg-black p-4 rounded-full text-white">
+                                <i class="fas fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2">WhatsApp</h4>
+                                <a href="tel:+6281126351197" class="text-gray-600 hover:text-black">+(62) 811 2635 197</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-6">
+                            <div class="bg-black p-4 rounded-full text-white">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2">Email</h4>
+                                <a href="mailto:mail@dxyary.com" class="text-gray-600 hover:text-black">mail@dxyary.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Maps -->
+                    <div class="mt-12 rounded-xl overflow-hidden shadow-lg">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.636500564053!2d110.36392377457184!3d-7.749446992269398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a592e3ab4bbf9%3A0x41bba62baf528d1f!2sLembvr%20Creative%20Media!5e1!3m2!1sid!2sid!4v1738273598342!5m2!1sid!2sid"
+                            width="100%"
+                            height="300"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="w-full">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6">Tim Kami</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Bertemu dengan orang-orang kreatif di balik DXYARY
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Team Member 1 -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg">
+                        <img src="images/potraits.jpg" alt="Team Member" class="w-full h-96 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                            <h3 class="text-2xl font-bold mb-2">John Doe</h3>
+                            <p class="text-gray-200">Founder & Creative Director</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg">
+                        <img src="images/potraits.jpg" alt="Team Member" class="w-full h-96 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                            <h3 class="text-2xl font-bold mb-2">Jane Smith</h3>
+                            <p class="text-gray-200">Head Photographer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg">
+                        <img src="images/potraits.jpg" alt="Team Member" class="w-full h-96 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                            <h3 class="text-2xl font-bold mb-2">Mike Johnson</h3>
+                            <p class="text-gray-200">Coffee Expert</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-16">
+                <div class="col-span-2">
+                    <img src="images/logo.png" alt="DXYARY Logo" class="h-16 mb-8 w-auto rounded-full">
+                    <p class="text-gray-400 text-lg mb-2">PT Hanjaya Dayari Raya</p>
+                    <p class="text-gray-400 mb-2">Taman Melati Yogyakarta Com 11, DI Yogyakarta 55284</p>
+                    <p class="text-gray-400 mb-2">+(62) 811 2635 197</p>
+                    <p class="text-gray-400">mail@dxyary.com</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Quick Links</h4>
+                    <div class="space-y-4">
+                        <a href="#home" class="block text-gray-400 hover:text-white transition-colors">Home</a>
+                        <a href="#aromansa" class="block text-gray-400 hover:text-white transition-colors">Aromansa</a>
+                        <a href="#potraits" class="block text-gray-400 hover:text-white transition-colors">Potraits</a>
+                        <a href="#about" class="block text-gray-400 hover:text-white transition-colors">About</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Follow Us</h4>
+                    <div class="flex space-x-6">
+                        <a href="#" class="social-icon text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube text-2xl"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white">
+                            <i class="fab fa-tiktok text-2xl"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white">
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-16 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 DXYARY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a id="whatsappButton" href="https://wa.me/628112635197" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenu = document.getElementById('mobileMenu');
+        const openMenuBtn = document.getElementById('openMenu');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        openMenuBtn.addEventListener('click', openMobileMenu);
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when clicking on links
+        Array.from(mobileMenuLinks).forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+                
+                // Smooth scroll to section
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        const nav = document.querySelector('nav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                nav.classList.remove('shadow-lg');
+                nav.style.transform = 'translateY(0)';
+                return;
+            }
+            
+            if (currentScroll > lastScroll && !nav.classList.contains('scroll-down')) {
+                // Scrolling down
+                nav.classList.add('shadow-lg');
+                nav.style.transform = 'translateY(-100%)';
+            } else if (currentScroll < lastScroll && nav.classList.contains('scroll-down')) {
+                // Scrolling up
+                nav.classList.remove('shadow-lg');
+                nav.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Add fade-in animation to elements
+        document.querySelectorAll('.card-hover, .social-icon').forEach(el => {
+            el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
