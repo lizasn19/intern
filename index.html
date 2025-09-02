@@ -203,7 +203,7 @@
     <section id="home" class="relative h-screen">
         <div class="carousel-container relative h-full">
             <div class="carousel-fade active absolute inset-0">
-                <img src="images/baner.png" alt="DXYARY" class="w-full h-full object-cover">
+                <img src="images/banner_website.jpg" alt="DXYARY" class="w-full h-full object-cover">
                 <div class="absolute inset-0 hero-gradient"></div>
                 <div class="absolute inset-0 flex items-center justify-center text-white text-center">
                     <div class="max-w-3xl px-4">
@@ -618,26 +618,26 @@
         });
 
         // Your existing carousel code
-        const carouselImages = [
-            "images/baner_1.jpg",
-            "images/baner_2.jpg",
-            "images/baner_3.jpg",
-        ];
+        //const carouselImages = [
+            //"images/baner_1.jpg",
+            //"images/baner_2.jpg",
+            //"images/baner_3.jpg",
+        //];
 
-        let currentSlide = 0;
-        const carousel = document.querySelector('.carousel-fade');
+        //let currentSlide = 0;
+        //const carousel = document.querySelector('.carousel-fade');
 
-        function updateCarousel() {
-            carousel.classList.remove('active');
-            setTimeout(() => {
-                const img = carousel.querySelector('img');
-                img.src = carouselImages[currentSlide];
-                carousel.classList.add('active');
-                currentSlide = (currentSlide + 1) % carouselImages.length;
-            }, 500);
-        }
+        //function updateCarousel() {
+            //carousel.classList.remove('active');
+            //setTimeout(() => {
+                //const img = carousel.querySelector('img');
+                //img.src = carouselImages[currentSlide];
+                //carousel.classList.add('active');
+                //currentSlide = (currentSlide + 1) % carouselImages.length;
+            //}, 500);
+        //}
 
-        setInterval(updateCarousel, 5000);
+        //setInterval(updateCarousel, 5000);
 
         // Smooth scroll functionality
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
